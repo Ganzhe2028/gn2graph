@@ -1,3 +1,9 @@
+> **历史版本提示词模板（已归档）**
+>
+> 这个文件对应一个更复杂的 pipeline：它假设输出目录里有 `graph.json`、`manifest.json`、`overview.png`、`recognition_tasks/page_XXX.json` 等文件。
+>
+> 当前 gn2graph 已经简化为纯切片器，每次运行会在输出目录**自动生成** `prompt.md`（CRoC 框架，默认任务为会议纪要 + 待办清单）和 `upload/` 目录。这个旧模板仅作为历史参考保留。
+
 # GoodNotes Whiteboard Agent Handoff
 
 You are a multimodal agent reading a preprocessed GoodNotes whiteboard folder.
@@ -16,7 +22,7 @@ Follow this file as the instruction source; the user does not need to write anot
 - Preserve every `graph.json.edges[]` relationship explicitly in the final notes.
 - If an edge has `from_text` and `to_text`, write that relationship literally, for example: `from_text -> to_text`.
 - Long-distance connectors are not decorative unless the visual evidence clearly proves otherwise.
-- Do not replace graph edges with broad summaries such as "the line connects the overall structure".
+- Do not replace graph edges with broad summaries such as “the line connects the overall structure”.
 - Use `overview.png` to verify global placement and tile images to verify exact handwriting.
 - When graph evidence and visual interpretation conflict, report the conflict instead of silently choosing a smoother story.
 - Mark uncertain readings with `[unclear]`; do not invent missing text to make the notes sound complete.
