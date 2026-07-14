@@ -1,0 +1,340 @@
+{
+  "nodes": [
+    {
+      "id": "n1",
+      "text": "AI",
+      "bbox": [500, 1320, 170, 180]
+    },
+    {
+      "id": "n2",
+      "text": "实际使用场景",
+      "bbox": [930, 1280, 720, 190]
+    },
+    {
+      "id": "n3",
+      "text": "Prompt Eng.",
+      "bbox": [1750, 1060, 720, 180]
+    },
+    {
+      "id": "n4",
+      "text": "单一问题、浅显提问",
+      "bbox": [2940, 860, 1100, 170]
+    },
+    {
+      "id": "n5",
+      "text": "角色扮演 / 人格 / 风格设定",
+      "bbox": [3000, 1160, 1600, 180]
+    },
+    {
+      "id": "n6",
+      "text": "Context Eng.",
+      "bbox": [1740, 1450, 760, 180]
+    },
+    {
+      "id": "n7",
+      "text": "高语境转换语境；Reference",
+      "bbox": [3050, 1470, 1900, 180]
+    },
+    {
+      "id": "n8",
+      "text": "有意识地补充和解释 bg-info",
+      "bbox": [3040, 1720, 1850, 180]
+    },
+    {
+      "id": "n9",
+      "text": "Harness Eng.",
+      "bbox": [1750, 1840, 780, 180]
+    },
+    {
+      "id": "n10",
+      "text": "工程 / 任务 / 工作流入门（部分字迹不确定）",
+      "bbox": [3000, 1960, 1750, 180]
+    },
+    {
+      "id": "n11",
+      "text": "Loop Eng.",
+      "bbox": [1760, 2190, 620, 170]
+    },
+    {
+      "id": "n12",
+      "text": "重复、自动化、scheduled workflow、交付",
+      "bbox": [2900, 2180, 2050, 180]
+    },
+    {
+      "id": "n13",
+      "text": "日常：泛知识问答 / 翻译 / 概括 / 解释 / 问 xx 怎么用",
+      "bbox": [2500, 1040, 3100, 180]
+    },
+    {
+      "id": "n14",
+      "text": "学术：Academic 搜索、调研",
+      "bbox": [2500, 1270, 1700, 170]
+    },
+    {
+      "id": "n15",
+      "text": "知识 / 领域搜索：深入了解一个领域、公司、行业",
+      "bbox": [2500, 1500, 2850, 180]
+    },
+    {
+      "id": "n16",
+      "text": "协作/交付：议题、问题、proposal、讲稿、案例（部分字迹不确定）",
+      "bbox": [2500, 1710, 3250, 180]
+    },
+    {
+      "id": "n17",
+      "text": "学术 / 原理层面的理解",
+      "bbox": [1550, 2700, 1850, 190]
+    },
+    {
+      "id": "n18",
+      "text": "Context 包含 Prompt 的嵌套关系示意图",
+      "bbox": [4420, 820, 1800, 870]
+    },
+    {
+      "id": "n19",
+      "text": "Prompt：一次你发给 AI 的消息；拿捏你与 AI 的交流方式",
+      "bbox": [6200, 850, 1900, 300]
+    },
+    {
+      "id": "n20",
+      "text": "Context：整个 session 中的交流方式；对 model 的记忆和 reference 的了解；对 new 时机与理由的判断与思考",
+      "bbox": [6200, 1400, 2900, 470]
+    },
+    {
+      "id": "n21",
+      "text": "交流方式",
+      "bbox": [6250, 2130, 720, 160]
+    },
+    {
+      "id": "n22",
+      "text": "但为何奏效？",
+      "bbox": [6250, 700, 760, 170]
+    },
+    {
+      "id": "n23",
+      "text": "单次 prompt = 张口前的思维模板或方式",
+      "bbox": [6770, 950, 2100, 170]
+    },
+    {
+      "id": "n24",
+      "text": "综合 context 意识 + prompt = 复述语 + 理解自己要补充什么给 AI + 在全程交流中明确聊到哪里，并引导 AI 思考、补充、澄清表述信息、仔细理解",
+      "bbox": [6750, 1130, 3700, 220]
+    },
+    {
+      "id": "n25",
+      "text": "对 model 在 chatbot 形态下自己的理解和搜索（对经验资料和学界研究的了解）",
+      "bbox": [6750, 1480, 2900, 170]
+    },
+    {
+      "id": "n26",
+      "text": "对 model 在 Agent frame 形态下的理解、总结和搜索",
+      "bbox": [6750, 1700, 2550, 170]
+    },
+    {
+      "id": "n27",
+      "text": "协助了项目；vibe coding",
+      "bbox": [8650, 1680, 1100, 260]
+    },
+    {
+      "id": "n28",
+      "text": "做到、做成了 xx，以及没做成 xx",
+      "bbox": [8650, 1900, 1400, 170]
+    },
+    {
+      "id": "n29",
+      "text": "右侧括号汇总：后续内容未展开 / 字迹不完整",
+      "bbox": [9550, 1300, 850, 650]
+    }
+  ],
+  "edges": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "type": "line",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n2",
+      "to": "n3",
+      "type": "brace_group",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n2",
+      "to": "n6",
+      "type": "brace_group",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n2",
+      "to": "n9",
+      "type": "brace_group",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n2",
+      "to": "n11",
+      "type": "brace_group",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n3",
+      "to": "n4",
+      "type": "arrow",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n3",
+      "to": "n5",
+      "type": "arrow",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n6",
+      "to": "n7",
+      "type": "arrow",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n6",
+      "to": "n8",
+      "type": "arrow",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n9",
+      "to": "n10",
+      "type": "arrow",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n11",
+      "to": "n12",
+      "type": "arrow",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n7",
+      "to": "n13",
+      "type": "brace_context_examples",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n7",
+      "to": "n14",
+      "type": "brace_context_examples",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n7",
+      "to": "n15",
+      "type": "brace_context_examples",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n7",
+      "to": "n16",
+      "type": "brace_context_examples",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n18",
+      "to": "n19",
+      "type": "contains",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n18",
+      "to": "n20",
+      "type": "contains",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n19",
+      "to": "n23",
+      "type": "annotation",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n20",
+      "to": "n24",
+      "type": "annotation",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n20",
+      "to": "n21",
+      "type": "arrow",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n23",
+      "to": "n22",
+      "type": "question_annotation",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n24",
+      "to": "n25",
+      "type": "brace_group",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n24",
+      "to": "n26",
+      "type": "brace_group",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n26",
+      "to": "n27",
+      "type": "arrow",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n27",
+      "to": "n28",
+      "type": "detail",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n27",
+      "to": "n29",
+      "type": "brace_group",
+      "cross_tile": false,
+      "external": false
+    },
+    {
+      "from": "n18",
+      "to": "n17",
+      "type": "large_curved_arrow",
+      "cross_tile": false,
+      "external": false
+    }
+  ]
+}
