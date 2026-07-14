@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import sys
 from typing import Any
 
@@ -113,6 +114,92 @@ def save_tiles(
     return metadata_tiles
 
 
+def copy_tiles_to_upload(output_dir: str, upload_dir: str, tiles_metadata: list[dict[str, Any]]) -> None:
+    os.makedirs(upload_dir, exist_ok=True)
+    for tile in tiles_metadata:
+        src = os.path.join(output_dir, tile["filename"])
+        dst = os.path.join(upload_dir, tile["filename"])
+        shutil.copy2(src, dst)
+    print(f"Copied {len(tiles_metadata)} tile(s) to {upload_dir}")
+
+
+def write_prompt(
+    output_dir: str,
+    upload_dir: str,
+    source_path: str,
+    canvas_size: tuple[int, int],
+    dpi: int,
+    tile_height: int,
+    overlap_pct: float,
+    tile_count: int,
+) -> None:
+    source_name = os.path.basename(source_path)
+    overlap_px = int(tile_height * overlap_pct)
+    prompt = f"""# LLM Processing Prompt for `{source_name}`
+
+Upload this file together with all `tile_*.jpg` images in this folder to ChatGPT, then type any additional request in the chat box.
+
+## User's additional request
+[Type your extra request here in the ChatGPT dialog. For example: "Focus on the top-right of tile_001" or "Group todos by project."]
+
+## Context
+You are processing a set of tile images sliced from a single GoodNotes whiteboard PDF.
+
+- Source PDF: `{source_path}`
+- Original canvas size: {canvas_size[0]} x {canvas_size[1]} px
+- Rendered at {dpi} DPI
+- Sliced into {tile_count} tiles, each up to {tile_height} px tall
+- Overlap between adjacent tiles: {overlap_pct * 100:.0f}% ({overlap_px} px)
+- Each tile filename and its global vertical position are described in `metadata.json` in the parent folder.
+
+Each tile is a vertical slice of the same canvas. Content that spans a tile boundary appears in the overlapping region of at least one tile, so you can read tiles independently. Use `global_y` coordinates from `metadata.json` if you need absolute positions.
+
+## Request
+Extract and organize the content of this whiteboard into a structured meeting notes document, including:
+
+1. A concise summary of the discussion or content
+2. Key decisions made
+3. Open questions or unresolved points
+4. A list of action items / TODOs with owner, deadline, and priority if visible
+
+## Output Format
+Provide your response in this structure:
+
+1. **Summary**: brief overview of the whiteboard content
+2. **Decisions**: key decisions explicitly stated or clearly implied
+3. **Open Questions**: unresolved points or things that need follow-up
+4. **Action Items / TODOs**: list with owner, deadline, and priority where visible; mark unclear fields as `[unclear]`
+5. **Uncertainties**: anything ambiguous, unreadable, or cut off
+
+If absolute coordinates help, reference `tile.index` and approximate `global_y` from `metadata.json`.
+
+## Constraints
+- Do not invent information not visible in the tiles.
+- If text is unreadable or cut off, mark it as `[unclear]` rather than guessing.
+- Do not merge visually distinct items unless explicitly connected.
+- Respect the vertical reading order implied by `global_y`.
+- Combine the user's additional request above with this default task; do not ignore either.
+
+## Checkpoint
+Stop and ask for clarification if:
+- The tiles appear out of order or corrupted.
+- The user's additional request conflicts with the default task in a way you cannot reconcile.
+- You encounter conflicting information across overlapping tiles that you cannot resolve.
+
+Otherwise, proceed with the full extraction.
+"""
+    prompt_path = os.path.join(output_dir, "prompt.md")
+    with open(prompt_path, "w", encoding="utf-8") as f:
+        f.write(prompt)
+    print(f"Saved prompt template to {prompt_path}")
+
+    os.makedirs(upload_dir, exist_ok=True)
+    upload_prompt_path = os.path.join(upload_dir, "prompt.md")
+    with open(upload_prompt_path, "w", encoding="utf-8") as f:
+        f.write(prompt)
+    print(f"Copied prompt to {upload_prompt_path}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Slice a GoodNotes whiteboard PDF into tiles for local VLM processing."
@@ -171,6 +258,20 @@ def main() -> int:
     with open(meta_path, "w", encoding="utf-8") as f:
         json.dump(metadata, f, ensure_ascii=False, indent=2)
     print(f"Saved metadata to {meta_path}")
+
+    upload_dir = os.path.join(args.output_dir, "upload")
+    copy_tiles_to_upload(args.output_dir, upload_dir, metadata_tiles)
+
+    write_prompt(
+        args.output_dir,
+        upload_dir,
+        args.pdf,
+        canvas.size,
+        args.dpi,
+        args.tile_height,
+        args.overlap,
+        len(tiles),
+    )
     return 0
 
 

@@ -21,8 +21,11 @@ gn2graph 是一个轻量级工具，把 GoodNotes 单页超大 whiteboard 导出
 gn2graph/
 ├── gn2graph.py           # 主脚本
 ├── requirements.txt      # 依赖
+├── .gitignore            # Git 忽略规则
 ├── agents.md             # 本文件
 ├── context.md            # 项目上下文沉淀
+├── macos/                # macOS 启动器
+│   └── build-gn2graph-app.sh
 └── goodnotes-whiteboard-test-materials/
     ├── test-editable.pdf
     ├── test-flatten.pdf
@@ -38,17 +41,21 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
-python gn2graph.py your-notes.pdf -o output_tiles
+python gn2graph.py your-notes.pdf
 ```
 
 输出目录：
 
 ```
-output_tiles/
+tiles/
 ├── tile_000.jpg
 ├── tile_001.jpg
 ├── ...
-└── metadata.json
+├── metadata.json
+├── prompt.md          # 给 LLM 的提示词模板（CRoC 框架）
+└── upload/            # 直接上传给 ChatGPT 的内容
+    ├── prompt.md
+    └── tile_*.jpg
 ```
 
 ## CLI 参数
@@ -61,6 +68,22 @@ output_tiles/
 | `--overlap` | `0.05` | 块间重叠比例 |
 | `--dpi` | `200` | PDF 渲染 DPI |
 | `--quality` | `90` | 输出 JPEG 质量 |
+
+## macOS 启动器（可选）
+
+项目提供一个 Spotlight 可启动的 `.app`，避免每次打开终端/Cursor。
+
+```bash
+./macos/build-gn2graph-app.sh
+```
+
+构建完成后：
+
+- 按 `⌘Space`，输入 `gn2graph`，回车启动，选择 PDF 即可。
+- 或把 `gn2graph.app` 拖到 Dock，直接把 PDF 拖到图标上处理。
+- 输出目录自动放在 PDF 同级，命名为 `{pdf_name}_tiles`。
+
+`build-gn2graph-app.sh` 把项目路径和 venv Python 路径硬编码进 app，因此不依赖 PATH，也不会污染主脚本。
 
 ## 设计原则
 

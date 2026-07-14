@@ -9,4 +9,5 @@ __pycache__/
 
 # Outputs
 tiles/
+*_tiles/
 output_agent_context/
